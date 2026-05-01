@@ -61,7 +61,7 @@ function initMap() {
 
   rasterCoordsRef.value = rc
 
-  L.tileLayer('./tiles/{z}/{x}/{y}.png', {
+  L.tileLayer('./tiles/{z}/{x}/{y}.webp', {
     noWrap: true,
     bounds: rc.getMaxBounds(),
     maxNativeZoom: rc.zoomLevel(),
