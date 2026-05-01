@@ -16,6 +16,8 @@ const mapContainerRef = ref<HTMLElement>()
 const mapInstanceRef = ref<L.Map>()
 const rasterCoordsRef = ref<L.RasterCoords>()
 
+const zoomLevel = ref<number>()
+
 function createMarkLayer() {
   if (!mapInstanceRef.value || !rasterCoordsRef.value) return
 
@@ -29,15 +31,27 @@ function createMarkLayer() {
       if (matter.type === 'SceneArea001') {
         const areaName = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
           icon: L.divIcon({
-            className: 'map-location',
+            iconSize: [0, 0],
           }),
         }).bindTooltip(site.name!, {
           permanent: true,
           direction: 'center',
-          className: 'map-location',
+          className: 'map-location show-level-1',
         })
 
         areaName.addTo(mapInstance)
+      } else if (matter.type === 'SceneArea002') {
+        const subAreaName = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
+          icon: L.divIcon({
+            iconSize: [0, 0],
+          }),
+        }).bindTooltip(site.name!, {
+          permanent: true,
+          direction: 'center',
+          className: 'map-location show-level-2',
+        })
+
+        subAreaName.addTo(mapInstance)
       } else {
         const marker = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
           icon: L.icon({
@@ -50,6 +64,14 @@ function createMarkLayer() {
       }
     })
   })
+}
+
+function onZoomEnd() {
+  if (!mapInstanceRef.value) return
+
+  const mapInstance = mapInstanceRef.value
+
+  zoomLevel.value = mapInstance.getZoom()
 }
 
 function initMap() {
@@ -88,6 +110,10 @@ function initMap() {
   L.control.zoom({ position: 'bottomleft' }).addTo(map)
 
   createMarkLayer()
+
+  zoomLevel.value = map.getZoom()
+
+  map.on('zoomend', onZoomEnd)
 }
 
 onMounted(() => {
@@ -96,23 +122,45 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="mapContainerRef" class="mapCont"></div>
+  <div ref="mapContainerRef" class="mapCont" :zoom-level="zoomLevel"></div>
 </template>
 
-<style>
+<style lang="scss">
 .mapCont {
   background-color: #010101;
   height: 100%;
   width: 100%;
 }
 
-.map-location {
+.map-tooltip {
   padding: 0;
   background-color: transparent;
   border: 0;
   color: #ffc23d;
   box-shadow: none;
+}
 
+.map-location {
+  @extend .map-tooltip;
+}
+
+.show-level-1 {
   font-size: 16px;
+
+  @each $level in 5, 6, 7 {
+    [zoom-level='#{$level}'] & {
+      opacity: 0 !important;
+    }
+  }
+}
+
+.show-level-2 {
+  font-size: 18px;
+
+  @each $level in 3, 4 {
+    [zoom-level='#{$level}'] & {
+      opacity: 0 !important;
+    }
+  }
 }
 </style>
