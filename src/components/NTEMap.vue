@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import * as L from 'leaflet'
+import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-rastercoords'
 

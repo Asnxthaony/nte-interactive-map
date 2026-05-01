@@ -11,6 +11,7 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/nte-interactive-map/',
   plugins: [
     Vue({
       template: { transformAssetUrls },
