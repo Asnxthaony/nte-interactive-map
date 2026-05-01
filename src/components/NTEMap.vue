@@ -24,14 +24,30 @@ function createMarkLayer() {
 
   props.matters?.forEach((matter) => {
     matter.sites.forEach((site) => {
-      const marker = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
-        icon: L.icon({
-          iconUrl: matter.icon,
-          iconSize: [32, 32],
-        }),
-      }).bindPopup(`X: ${site.x} Y: ${site.y}`)
+      const siteName = site.name ? `${matter.name}-${site.name}` : matter.name
 
-      marker.addTo(mapInstance)
+      if (matter.type === 'SceneArea001') {
+        const areaName = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
+          icon: L.divIcon({
+            className: 'map-location',
+          }),
+        }).bindTooltip(site.name!, {
+          permanent: true,
+          direction: 'center',
+          className: 'map-location',
+        })
+
+        areaName.addTo(mapInstance)
+      } else {
+        const marker = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
+          icon: L.icon({
+            iconUrl: matter.icon,
+            iconSize: [38, 38],
+          }),
+        }).bindPopup(`${siteName}<br>X: ${site.x} Y: ${site.y}`)
+
+        marker.addTo(mapInstance)
+      }
     })
   })
 }
@@ -83,9 +99,20 @@ onMounted(() => {
   <div ref="mapContainerRef" class="mapCont"></div>
 </template>
 
-<style scoped>
+<style>
 .mapCont {
+  background-color: #010101;
   height: 100%;
   width: 100%;
+}
+
+.map-location {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  color: #ffc23d;
+  box-shadow: none;
+
+  font-size: 16px;
 }
 </style>
