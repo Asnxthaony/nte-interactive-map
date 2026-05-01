@@ -5,8 +5,19 @@ import NTEMap from '@/components/NTEMap.vue'
 
 const Matters: MapMatter[] = [
   {
+    name: '维特海默塔',
+    icon: 'https://static.ghzs666.com/game-wiki/images/69ec374f6018ac00011530bd.png',
+    sites: [
+      { x: -94823, y: 165376 },
+      { x: -184528.28, y: 211012.42 },
+      { x: -171144.38, y: 106510.41 },
+      { x: -30515.836, y: 7779.323 },
+      { x: 10521.551, y: 65394.363 },
+    ],
+  },
+  {
     name: 'ReroReco电话亭',
-    icon: 'https://uploadstatic.mihoyo.com/ys-obc/2022/11/25/75379475/7d650757c10b70cb42189f7fca0c9778_7547860493386240880.png',
+    icon: 'https://static.ghzs666.com/game-wiki/images/69ec375f4e6c910001d2691d.png',
     sites: [
       { x: 4002.999, y: 260999.62 },
       { x: -91137.586, y: 153176.33 },
