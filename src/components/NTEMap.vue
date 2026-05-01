@@ -6,7 +6,7 @@ import 'leaflet-rastercoords'
 //
 import type { MapMatter } from '@/types/Map'
 
-import { worldPosToMapPos } from '@/utils/map-utils'
+import { MapConfig, worldPosToMapPos } from '@/utils/map-utils'
 
 const props = defineProps<{
   matters?: MapMatter[]
@@ -48,19 +48,16 @@ function initMap() {
 
     // Map State Options
     crs: L.CRS.Simple,
-    zoom: 3,
     minZoom: 3,
-    maxZoom: 7,
 
     // Animation options
     zoomAnimation: false,
   })
 
-  const mapCenter = worldPosToMapPos(-45328, 118095)
+  const rc = new L.RasterCoords(map, [MapConfig.MapSize, MapConfig.MapSize])
 
-  const rc = new L.RasterCoords(map, [22528, 22528])
   map.setMaxZoom(rc.zoomLevel())
-  map.setView(rc.unproject(mapCenter), 3)
+  map.setView(rc.unproject(worldPosToMapPos(MapConfig.MapCenter.X, MapConfig.MapCenter.Y)), 3)
 
   rasterCoordsRef.value = rc
 
