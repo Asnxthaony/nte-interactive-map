@@ -9,4 +9,6 @@ export interface MapSite {
   name?: string
   x: number
   y: number
+  z?: number
+  w?: number
 }

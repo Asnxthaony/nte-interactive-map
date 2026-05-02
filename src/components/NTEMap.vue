@@ -29,7 +29,7 @@ function createMarkLayer() {
       const siteName = site.name ? `${matter.name}-${site.name}` : matter.name
 
       if (matter.type === 'SceneArea001') {
-        const areaName = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
+        const placeNameMarker = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
           icon: L.divIcon({
             iconSize: [0, 0],
           }),
@@ -39,19 +39,27 @@ function createMarkLayer() {
           className: 'map-location show-level-1',
         })
 
-        areaName.addTo(mapInstance)
+        placeNameMarker.addTo(mapInstance)
       } else if (matter.type === 'SceneArea002') {
-        const subAreaName = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
+        const placeName = L.DomUtil.create('div')
+        placeName.innerText = site.name!
+
+        if (site.z && site.w) {
+          const deg = Math.atan2(site.z, site.w) * (360 / Math.PI)
+          placeName.style.transform = `rotateZ(${deg}deg)`
+        }
+
+        const placeNameMarker = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
           icon: L.divIcon({
             iconSize: [0, 0],
           }),
-        }).bindTooltip(site.name!, {
+        }).bindTooltip(placeName, {
           permanent: true,
           direction: 'center',
           className: 'map-location show-level-2',
         })
 
-        subAreaName.addTo(mapInstance)
+        placeNameMarker.addTo(mapInstance)
       } else {
         const marker = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
           icon: L.icon({
@@ -138,6 +146,7 @@ onMounted(() => {
   border: 0;
   color: #ffc23d;
   box-shadow: none;
+  font-size: 24px;
 }
 
 .map-location {
@@ -145,8 +154,6 @@ onMounted(() => {
 }
 
 .show-level-1 {
-  font-size: 16px;
-
   @each $level in 5, 6, 7 {
     [zoom-level='#{$level}'] & {
       opacity: 0 !important;
@@ -155,8 +162,6 @@ onMounted(() => {
 }
 
 .show-level-2 {
-  font-size: 18px;
-
   @each $level in 3, 4 {
     [zoom-level='#{$level}'] & {
       opacity: 0 !important;
