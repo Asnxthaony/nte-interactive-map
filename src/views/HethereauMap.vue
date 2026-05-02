@@ -91,7 +91,7 @@ const Matters: MapMatter[] = [
   },
   {
     type: 'Transfer',
-    name: 'ReroReco电话亭',
+    name: 'ReroRero电话亭',
     icon: './icons/Transfer.webp',
     sites: [
       { name: 'M10区-01', x: 4002.999, y: 260999.62 },
