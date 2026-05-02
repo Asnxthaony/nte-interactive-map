@@ -6,9 +6,9 @@ export interface MapMatter {
 }
 
 export interface MapSite {
+  id: string
   name?: string
   x: number
   y: number
-  z?: number
-  w?: number
+  rot?: number
 }

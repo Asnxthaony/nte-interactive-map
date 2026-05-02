@@ -44,9 +44,8 @@ function createMarkLayer() {
         const placeName = L.DomUtil.create('div')
         placeName.innerText = site.name!
 
-        if (site.z && site.w) {
-          const deg = Math.atan2(site.z, site.w) * (360 / Math.PI)
-          placeName.style.transform = `rotateZ(${deg}deg)`
+        if (site.rot) {
+          placeName.style.transform = `rotateZ(${site.rot}deg)`
         }
 
         const placeNameMarker = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
@@ -66,7 +65,7 @@ function createMarkLayer() {
             iconUrl: matter.icon,
             iconSize: [38, 38],
           }),
-        }).bindPopup(`${siteName}<br>X: ${site.x} Y: ${site.y}`)
+        }).bindPopup(`${site.id}<br>${siteName}<br>X: ${site.x} Y: ${site.y}`)
 
         marker.addTo(mapInstance)
       }
@@ -146,11 +145,11 @@ onMounted(() => {
   border: 0;
   color: #ffc23d;
   box-shadow: none;
-  font-size: 24px;
 }
 
 .map-location {
   @extend .map-tooltip;
+  font-size: 24px;
 }
 
 .show-level-1 {
