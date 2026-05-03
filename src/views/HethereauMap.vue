@@ -110,6 +110,23 @@ const Matters: MapMatter[] = [
       { id: 'MapTransfer_00505', name: '新赫兰德区-05', x: -11354.659, y: 74277.586 },
     ],
   },
+  {
+    type: 'WorldSafeBox',
+    name: '保险箱',
+    icon: './icons/TreasureBox.webp',
+    sites: [
+      { id: 'Safe_Box_Lv1_003_001', name: '银保险箱', x: -178284.0, y: 111580.0 },
+      { id: 'Safe_Box_Lv1_003_002', name: '银保险箱', x: -125319.0, y: 46886.0 },
+      { id: 'Safe_Box_Lv1_004_001', name: '银保险箱', x: -121179.0, y: 5552.0 },
+      { id: 'Safe_Box_Lv1_004_002', name: '银保险箱', x: -39765.0, y: -26142.0 },
+      { id: 'Safe_Box_Lv1_004_003', name: '银保险箱', x: 55264.0, y: 13835.0 },
+      { id: 'Safe_Box_Lv1_004_004', name: '银保险箱', x: 48035.0, y: 6938.0 },
+      { id: 'Safe_Box_Lv1_004_005', name: '银保险箱', x: 43443.5, y: 34831.645 },
+      { id: 'Safe_Box_Lv1_004_006', name: '银保险箱', x: 43936.0, y: 33046.0 },
+      { id: 'Safe_Box_Lv3_004_001', name: '金保险箱', x: 53964.0, y: 14241.0 },
+      { id: 'Safe_Box_Lv3_004_002', name: '金保险箱', x: 43320.0, y: 35521.0 },
+    ],
+  },
 ]
 </script>
 
