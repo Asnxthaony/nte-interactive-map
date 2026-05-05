@@ -4,11 +4,12 @@ import 'leaflet/dist/leaflet.css'
 import 'leaflet-rastercoords'
 
 //
-import type { MapMatter } from '@/types/Map'
+import type { MapMatter, NTEMapConfig } from '@/types/Map'
 
-import { MapConfig, worldPosToMapPos } from '@/utils/map-utils'
+import { worldPosToMapPos } from '@/utils/map-utils'
 
 const props = defineProps<{
+  mapConfig: NTEMapConfig
   matters?: MapMatter[]
 }>()
 
@@ -29,11 +30,14 @@ function createMarkLayer() {
       const siteName = site.name ? `${matter.name}-${site.name}` : matter.name
 
       if (matter.type === 'SceneArea001') {
-        const placeNameMarker = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
-          icon: L.divIcon({
-            iconSize: [0, 0],
-          }),
-        }).bindTooltip(site.name!, {
+        const placeNameMarker = L.marker(
+          rc.unproject(worldPosToMapPos(site.x, site.y, props.mapConfig)),
+          {
+            icon: L.divIcon({
+              iconSize: [0, 0],
+            }),
+          },
+        ).bindTooltip(site.name!, {
           permanent: true,
           direction: 'center',
           className: 'map-location show-level-1',
@@ -48,11 +52,14 @@ function createMarkLayer() {
           placeName.style.transform = `rotateZ(${site.rot}deg)`
         }
 
-        const placeNameMarker = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
-          icon: L.divIcon({
-            iconSize: [0, 0],
-          }),
-        }).bindTooltip(placeName, {
+        const placeNameMarker = L.marker(
+          rc.unproject(worldPosToMapPos(site.x, site.y, props.mapConfig)),
+          {
+            icon: L.divIcon({
+              iconSize: [0, 0],
+            }),
+          },
+        ).bindTooltip(placeName, {
           permanent: true,
           direction: 'center',
           className: 'map-location show-level-2',
@@ -60,7 +67,7 @@ function createMarkLayer() {
 
         placeNameMarker.addTo(mapInstance)
       } else {
-        const marker = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y)), {
+        const marker = L.marker(rc.unproject(worldPosToMapPos(site.x, site.y, props.mapConfig)), {
           icon: L.icon({
             iconUrl: matter.icon,
             iconSize: [38, 38],
@@ -99,14 +106,18 @@ function initMap() {
     zoomAnimation: false,
   })
 
-  const rc = new L.RasterCoords(map, [MapConfig.MapSize, MapConfig.MapSize])
+  const mapConfig = props.mapConfig
+  const rc = new L.RasterCoords(map, [mapConfig.mapSize, mapConfig.mapSize])
 
   map.setMaxZoom(rc.zoomLevel())
-  map.setView(rc.unproject(worldPosToMapPos(MapConfig.MapCenter.X, MapConfig.MapCenter.Y)), 3)
+  map.setView(
+    rc.unproject(worldPosToMapPos(mapConfig.mapCenter.x, mapConfig.mapCenter.y, mapConfig)),
+    3,
+  )
 
   rasterCoordsRef.value = rc
 
-  L.tileLayer('./tiles/{z}/{x}/{y}.webp', {
+  L.tileLayer(mapConfig.urlTemplate, {
     noWrap: true,
     bounds: rc.getMaxBounds(),
     maxNativeZoom: rc.zoomLevel(),

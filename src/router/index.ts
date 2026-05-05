@@ -13,6 +13,11 @@ const router = createRouter({
       name: '海特洛市',
       component: () => import('../views/HethereauMap.vue'),
     },
+    {
+      path: '/bank',
+      name: '粉爪大劫案',
+      component: () => import('../views/BankMap.vue'),
+    },
   ],
 })
 

@@ -2,15 +2,7 @@
 import type { MapMatter } from '@/types/Map'
 
 import NTEMap from '@/components/NTEMap.vue'
-
-// MapArea
-//
-// [000] M10区
-// [001] 桥间地
-// [002] 未闻浦
-// [003] 绘空町
-// [004] 米格尔区
-// [005] 新赫兰德区
+import { MapConfigs } from '@/utils/map-utils'
 
 const Matters: MapMatter[] = [
   {
@@ -131,5 +123,5 @@ const Matters: MapMatter[] = [
 </script>
 
 <template>
-  <NTEMap :matters="Matters" />
+  <NTEMap :map-config="MapConfigs.Hethereau" :matters="Matters" />
 </template>

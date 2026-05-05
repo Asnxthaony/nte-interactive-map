@@ -1,26 +1,38 @@
-const MAP_EDGE_SIZE = 687134
-const MAP_TILE_SIZE = 512
-const MAP_TILE_COUNT = 44
-const MAP_SIZE = MAP_TILE_SIZE * MAP_TILE_COUNT
+import type { NTEMapConfig, NTEMapConfigs } from '@/types/Map'
 
-const MAP_SCALE = MAP_EDGE_SIZE / MAP_SIZE
-const MAP_CENTER_X = -40532.004
-const MAP_CENTER_Y = 131446.33
-
-export function worldPosToMapPos(worldX: number, worldY: number): [number, number] {
-  let mapX = (worldX - MAP_CENTER_X) / MAP_SCALE
-  let mapY = (worldY - MAP_CENTER_Y) / MAP_SCALE
-
-  mapX = MAP_SIZE / 2 + mapX
-  mapY = MAP_SIZE / 2 + mapY
-
-  return [mapX, mapY]
+export const MapConfigs: NTEMapConfigs = {
+  Hethereau: {
+    urlTemplate: './tiles/{z}/{x}/{y}.webp',
+    mapSize: 22528,
+    mapCenter: {
+      x: -40532.004,
+      y: 131446.33,
+    },
+    mapScale: 687134 / 22528,
+  },
+  Bank: {
+    urlTemplate: './tiles_bank/{z}/{x}/{y}.png',
+    mapSize: 16384,
+    mapCenter: {
+      x: 9008.948,
+      y: 2591.7354,
+    },
+    mapScale: 500000 / 16384,
+  },
 }
 
-export const MapConfig = {
-  MapSize: MAP_SIZE,
-  MapCenter: {
-    X: MAP_CENTER_X,
-    Y: MAP_CENTER_Y,
-  },
+export function worldPosToMapPos(
+  worldX: number,
+  worldY: number,
+  config?: NTEMapConfig,
+): [number, number] {
+  const { mapSize, mapCenter, mapScale } = config || MapConfigs.Hethereau
+
+  let mapX = (worldX - mapCenter.x) / mapScale
+  let mapY = (worldY - mapCenter.y) / mapScale
+
+  mapX = mapSize / 2 + mapX
+  mapY = mapSize / 2 + mapY
+
+  return [mapX, mapY]
 }

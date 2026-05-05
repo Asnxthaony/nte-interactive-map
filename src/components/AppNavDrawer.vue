@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import AppNavItem from './AppNavItem.vue'
 
-const navItems = computed(() => [{ href: '/hethereau', name: '海特洛市' }])
+const navItems = computed(() => {
+  const items = [{ href: '/hethereau', name: '海特洛市' }]
+
+  if (import.meta.env.DEV) {
+    items.push({ href: '/bank', name: '粉爪大劫案' })
+  }
+
+  return items
+})
 </script>
 
 <template>

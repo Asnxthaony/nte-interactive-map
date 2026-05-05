@@ -12,3 +12,18 @@ export interface MapSite {
   y: number
   rot?: number
 }
+
+export interface NTEMapConfig {
+  urlTemplate: string
+  mapSize: number
+  mapCenter: {
+    x: number
+    y: number
+  }
+  mapScale: number
+}
+
+export interface NTEMapConfigs {
+  Hethereau: NTEMapConfig
+  Bank: NTEMapConfig
+}
