@@ -26,6 +26,8 @@ function createMarkLayer() {
   const rc = rasterCoordsRef.value
 
   props.matters?.forEach((matter) => {
+    if (matter.isHideByDefault) return
+
     matter.sites.forEach((site) => {
       const siteName = site.name ? `${matter.name}-${site.name}` : matter.name
 

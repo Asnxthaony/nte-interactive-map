@@ -2,6 +2,7 @@ export interface MapMatter {
   type: string
   name: string
   icon: string
+  isHideByDefault?: boolean
   sites: MapSite[]
 }
 
