@@ -5,10 +5,10 @@ export const MapConfigs: NTEMapConfigs = {
     urlTemplate: './tiles/{z}/{x}/{y}.webp',
     mapSize: 26112,
     mapCenter: {
-      x: -40532.004,
-      y: 131446.33,
+      x: -15500,
+      y: 80000,
     },
-    mapScale: 796461.8 / 22528,
+    mapScale: 796461.8 / 26112,
   },
   Bank: {
     urlTemplate: './tiles_bank/{z}/{x}/{y}.png',
