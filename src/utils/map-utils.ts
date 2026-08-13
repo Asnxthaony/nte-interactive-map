@@ -5,7 +5,7 @@ export const MapConfigs: NTEMapConfigs = {
     urlTemplate: './tiles/{z}/{x}/{y}.webp',
     mapSize: 26112,
     mapCenter: {
-      x: -15500,
+      x: 0,
       y: 80000,
     },
     mapScale: 796461.8 / 26112,
