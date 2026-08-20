@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import 'leaflet-rastercoords'
+import { RasterCoords } from '@/utils/raster-coords'
 
 //
 import type { MapMatter, NTEMapConfig } from '@/types/Map'
@@ -15,7 +15,7 @@ const props = defineProps<{
 
 const mapContainerRef = ref<HTMLElement>()
 const mapInstanceRef = ref<L.Map>()
-const rasterCoordsRef = ref<L.RasterCoords>()
+const rasterCoordsRef = ref<RasterCoords>()
 
 const zoomLevel = ref<number>()
 
@@ -111,9 +111,9 @@ function initMap() {
   })
 
   const mapConfig = props.mapConfig
-  const rc = new L.RasterCoords(map, [mapConfig.mapSize, mapConfig.mapSize])
+  const rc = new RasterCoords(map, mapConfig.mapSize, mapConfig.mapSize)
 
-  map.setMaxZoom(rc.zoomLevel())
+  map.setMaxZoom(rc.getMaxZoom())
   map.setView(
     rc.unproject(worldPosToMapPos(mapConfig.mapCenter.x, mapConfig.mapCenter.y, mapConfig)),
     3,
@@ -124,7 +124,7 @@ function initMap() {
   L.tileLayer(mapConfig.urlTemplate, {
     noWrap: true,
     bounds: rc.getMaxBounds(),
-    maxNativeZoom: rc.zoomLevel(),
+    maxNativeZoom: rc.getMaxZoom(),
   }).addTo(map)
 
   mapInstanceRef.value = map
