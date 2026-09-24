@@ -217,6 +217,103 @@ const Matters: MapMatter[] = [
       { id: 'InteractBox_E06_060', name: '泊暮区-060', x: -202816.0, y: -42735.0 },
     ],
   },
+  {
+    type: 'PukaPoker',
+    name: '噗卡扑克',
+    icon: './icons/PukaPoker.png',
+    sites: [
+      {
+        id: 'PukaPokerA',
+        name: '红心A扑克',
+        x: 102172.73,
+        y: 160996.16,
+      },
+      {
+        id: 'PukaPoker6',
+        name: '红心6扑克',
+        x: 115742.55,
+        y: 156353.8,
+      },
+      {
+        id: 'PukaPokerQ',
+        name: '红心Q扑克',
+        x: 95788.57,
+        y: 154535.72,
+      },
+      {
+        id: 'PukaPoker10',
+        name: '红心10扑克',
+        x: 99594.625,
+        y: 145308.97,
+      },
+      {
+        id: 'PukaPoker8',
+        name: '红心8扑克',
+        x: 105038.43,
+        y: 148617.36,
+      },
+      {
+        id: 'PukaPokerK',
+        name: '红心K扑克',
+        x: 98546.56,
+        y: 157780.16,
+      },
+      {
+        id: 'PukaPoker7',
+        name: '红心7扑克',
+        x: 105672.84,
+        y: 151726.39,
+      },
+      {
+        id: 'PukaPokerJ',
+        name: '红心J扑克',
+        x: 96506.01,
+        y: 150490.38,
+      },
+      {
+        id: 'PukaPoker2',
+        name: '红心2扑克',
+        x: 102382.08,
+        y: 157836.42,
+      },
+      {
+        id: 'PukaPoker4',
+        name: '红心4扑克',
+        x: 108212.39,
+        y: 158712.23,
+      },
+      {
+        id: 'PukaPoker3',
+        name: '红心3扑克',
+        x: 102043.52,
+        y: 155169.28,
+      },
+      {
+        id: 'PukaPoker5',
+        name: '红心5扑克',
+        x: 111149.75,
+        y: 154430.92,
+      },
+      {
+        id: 'PukaPokerJokerB',
+        name: '大噗卡扑克',
+        x: 104448.84,
+        y: 153656.3,
+      },
+      {
+        id: 'PukaPoker9',
+        name: '红心9扑克',
+        x: 106985.11,
+        y: 145179.6,
+      },
+      {
+        id: 'PukaPokerJokerL',
+        name: '小噗卡扑克',
+        x: 104519.15,
+        y: 152982.2,
+      },
+    ],
+  },
 ]
 </script>
 
