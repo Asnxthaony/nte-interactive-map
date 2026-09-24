@@ -18,6 +18,7 @@ const Matters: MapMatter[] = [
       { id: 'area005', name: '新赫兰德区', x: -4895.132, y: 97549.805 },
       { id: 'area006', name: '泊暮区', x: -242753.9, y: -1283.868 },
       { id: 'xiangyangdao', name: '向阳岛', x: -259979.64, y: 356283.72 },
+      { id: 'area010', name: '噗卡乐园', x: 94146.59, y: 178190.58 },
     ],
   },
   {
